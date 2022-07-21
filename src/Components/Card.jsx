@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { changeTaskColumn, removeTasks } from '../common/slices/prefSlice'
 import icon from '../../src/point.png'
 
-const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOverItem }) => {
+const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOverItem, setEditTasks }) => {
     const dispatch = useDispatch()
     // const dragItem = useRef();
     // const dragOverItem = useRef();
@@ -42,10 +42,9 @@ const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOve
         <div key={index} className="card_main" onDrop={(e) => { drop(e) }} onDragEnter={(e) => dragEnter(e, index)} onDragStart={e => onDragStart(e, taskId, index)} draggable >
             <div className='card_wrapper' >
                 <h1>{name}</h1>
-
                 <div className="icon_wrapper">
 
-                    <AiFillEdit size={20} className='edit_icon' />
+                    <AiFillEdit onClick={() => { setEditTasks({ taskName: name, taskId, columnId }) }} size={20} className='edit_icon' />
                     <AiOutlineClose onClick={() => { dispatch(removeTasks({ taskId })) }} size={20} className='close_icon' />
                 </div>
             </div>

@@ -61,7 +61,9 @@ export const prefSlice = createSlice({
     },
     deleteColumn: (state, action) => {
       const { columnId } = action.payload
-      state.column = state.column.filter(data => data.columnId !== columnId)
+      if(state.column.length>1){
+        state.column = state.column.filter(data => data.columnId !== columnId)
+      }
     },
     addTasks: (state, action) => {
       const { columnId, taskName } = action.payload
@@ -72,8 +74,13 @@ export const prefSlice = createSlice({
       })
     },
 
-    editTasks: () => {
-
+    editTasksName: (state, action) => {
+      const { taskId ,taskName} = action.payload
+      state.tasks.forEach((data,index)=>{
+        if(taskId===data.taskId){
+          state.tasks[index].taskName=taskName
+        }
+      })
     },
     removeTasks: (state, action) => {
       const { taskId } = action.payload
@@ -94,7 +101,7 @@ export const prefSlice = createSlice({
   },
   devTools: true,
 });
-export const { addColumn, editColumnName, deleteColumn, addTasks, editTasks, removeTasks, changeTaskColumn} =
+export const { addColumn, editColumnName, deleteColumn, addTasks, editTasksName, removeTasks, changeTaskColumn} =
   prefSlice.actions;
 // export const selectCount = (state) => state.languagekey.languagekey;
 export const getAllColumn = (state) => state.prefrence.column;

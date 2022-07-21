@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Card from './Card'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
-import { addTasks, changeTaskColumn, deleteColumn, editColumnName } from '../common/slices/prefSlice'
+import { addTasks, changeTaskColumn, deleteColumn, editColumnName, editTasksName } from '../common/slices/prefSlice'
 import { AiOutlineClose } from 'react-icons/ai'
 const ColumnCard = ({ columnId, tasks, name }) => {
     const [taskName, setTaskName] = useState("")
@@ -11,15 +11,23 @@ const ColumnCard = ({ columnId, tasks, name }) => {
     const dispatch = useDispatch()
     const dragItem = useRef();
     const dragOverItem = useRef();
+    const [editTasks, setEditTasks] = useState()
+
     useEffect(() => {
         setList(tasks)
     }, [tasks])
     const handleAdd = (e) => {
         e.preventDefault()
-        if (taskName !== "") {
+        if (!editTasks) {
 
-            dispatch(addTasks({ columnId, taskName }))
-            setTaskName("")
+            if (taskName !== "") {
+
+                dispatch(addTasks({ columnId, taskName }))
+                setTaskName("")
+            }
+        } else {
+            dispatch(editTasksName({ taskId: editTasks.taskId, taskName: editTasks.taskName }))
+            setEditTasks()
         }
     }
     const handleDeleteColumn = () => {
@@ -36,6 +44,10 @@ const ColumnCard = ({ columnId, tasks, name }) => {
         let id = e.dataTransfer.getData("id");
         dispatch(changeTaskColumn({ columnId, taskId: id }))
     };
+
+    const changeTaskName = () => {
+
+    }
     return (
         <div key={columnId} className='column_card_wrapper' onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, columnId)}>
             <div className='header_inner'>
@@ -43,13 +55,24 @@ const ColumnCard = ({ columnId, tasks, name }) => {
                 <AiOutlineClose onClick={handleDeleteColumn} size={20} className='close_icon' />
             </div>
             {list.length !== 0 && list.map((data, index) => (
-                <Card key={data.taskId} dragItem={dragItem} dragOverItem={dragOverItem} name={data.taskName} setList={setList} tasks={list} index={index} taskId={data.taskId} columnId={columnId} />
+                <Card
+                    key={data.taskId}
+                    dragItem={dragItem}
+                    dragOverItem={dragOverItem}
+                    name={data.taskName}
+                    setList={setList}
+                    tasks={list}
+                    index={index}
+                    taskId={data.taskId}
+                    columnId={columnId}
+                    setEditTasks={setEditTasks}
+                />
             ))
             }
             <form onSubmit={handleAdd}>
 
                 <div className='add_tasks_input'>
-                    <input required value={taskName} onChange={(e) => { setTaskName(e.target.value) }} className='add_tasks_input' placeholder='Add Tasks' type="text" />
+                    <input required value={editTasks ? editTasks.taskName : taskName} onChange={(e) => { editTasks ? setEditTasks({ ...editTasks, taskName: e.target.value }) : setTaskName(e.target.value) }} className='add_tasks_input' placeholder='Add Tasks' type="text" />
                     <button type="submit">
                         <AiOutlinePlusCircle size={20} className='add_tasks' />
                     </button>
