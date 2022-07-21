@@ -52,11 +52,7 @@ export const prefSlice = createSlice({
       })
     },
     editColumnName: (state, action) => {
-      console.log("coming here")
-      // console.log("coming jere")
       const { columnId, columnName } = action.payload
-      console.log("🚀 ~ file: prefSlice.js ~ line 59 ~ columnId, columnName", columnId, columnName);
-      // console.log("🚀 ~ file: prefSlice.js ~ line 59 ~ action.payload", action.payload);
        state.column.forEach((data, index) => {
         if (data.columnId === columnId) {
           state.column[index].name = columnName
@@ -64,19 +60,16 @@ export const prefSlice = createSlice({
       })
     },
     deleteColumn: (state, action) => {
-      console.log("comin ghere")
       const { columnId } = action.payload
       state.column = state.column.filter(data => data.columnId !== columnId)
     },
     addTasks: (state, action) => {
       const { columnId, taskName } = action.payload
-      console.log("🚀 ~ file: prefSlice.js ~ line 53 ~ columnId , taskName", columnId, taskName);
       state.tasks.push({
         columnId,
         taskName,
         taskId: uuidv4()
       })
-      console.log("🚀 ~ file: prefSlice.js ~ line 59 ~ state.tasks", state.tasks);
     },
 
     editTasks: () => {
@@ -84,14 +77,10 @@ export const prefSlice = createSlice({
     },
     removeTasks: (state, action) => {
       const { taskId } = action.payload
-      console.log("🚀 ~ file: prefSlice.js ~ line 73 ~ action.payload", action.payload);
-      console.log("🚀 ~ file: prefSlice.js ~ line 73 ~ taskId", taskId);
       state.tasks = state.tasks.filter(data => data.taskId !== taskId)
     },
     changeTaskColumn :(state, action)=>{
-      console.log("coming in pref")
       const { columnId ,taskId} = action.payload
-      console.log("🚀 ~ file: prefSlice.js ~ line 94 ~ columnId ,taskId", columnId ,taskId);
       state.tasks.forEach((data,index)=>{
         if(taskId===data.taskId){
           state.tasks[index].columnId=columnId

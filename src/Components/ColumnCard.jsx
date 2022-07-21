@@ -32,32 +32,18 @@ const ColumnCard = ({ columnId, tasks, name }) => {
     const onDragOver = (e) => {
         e.preventDefault();
     };
-    const onDrop = (e, cat) => {
-        console.log("coming ")
+    const onDrop = (e) => {
         let id = e.dataTransfer.getData("id");
         dispatch(changeTaskColumn({ columnId, taskId: id }))
-        // let tasks = this.state.tasks.filter((task) => {
-        //     if (task.name == id) {
-        //         task.category = cat;
-        //         if (cat == "complete") {
-        //             task.bgColor = "#e57373";
-        //         } else {
-        //             task.bgColor = "#9fa8da";
-        //         }
-        //     }
-        //     return task;
-        // });
-
-        // this.setState({ ...this.state.tasks, tasks });
     };
     return (
-        <div className='column_card_wrapper' onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, columnId)}>
+        <div key={columnId} className='column_card_wrapper' onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, columnId)}>
             <div className='header_inner'>
-                <h1 onBlur={handleEditColumn} onInput={(e) => { setColumnName(e.target.innerText) }} contentEditable={true}>{name}</h1>
+                <h1 onBlur={handleEditColumn} suppressContentEditableWarning={true} onInput={(e) => { setColumnName(e.target.innerText) }} contentEditable={true}>{name}</h1>
                 <AiOutlineClose onClick={handleDeleteColumn} size={20} className='close_icon' />
             </div>
             {list.length !== 0 && list.map((data, index) => (
-                <Card dragItem={dragItem} dragOverItem={dragOverItem} name={data.taskName} setList={setList} tasks={list} index={index} taskId={data.taskId} columnId={columnId} />
+                <Card key={data.taskId} dragItem={dragItem} dragOverItem={dragOverItem} name={data.taskName} setList={setList} tasks={list} index={index} taskId={data.taskId} columnId={columnId} />
             ))
             }
             <form onSubmit={handleAdd}>

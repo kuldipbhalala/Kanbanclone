@@ -6,17 +6,13 @@ const Drag = () => {
   const dragItem = useRef();
   const dragOverItem = useRef();
   const [list, setList] = useState(['Item 1','Item 2','Item 3','Item 4','Item 5','Item 6']);
-  console.log("🚀 ~ file: Drag.jsx ~ line 9 ~ Drag ~ list", list);
  
   const dragStart = (e, position) => {
-  console.log("🚀 ~ file: Drag.jsx ~ line 12 ~ dragStart ~ position", position);
     dragItem.current = position;
-    console.log(e.target.innerHTML);
   };
  
   const dragEnter = (e, position) => {
     dragOverItem.current = position;
-    console.log(e.target.innerHTML);
   };
  
   const drop = (e) => {

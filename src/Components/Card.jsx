@@ -9,9 +9,6 @@ const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOve
     // const dragItem = useRef();
     // const dragOverItem = useRef();
     const onDragStart = (e, id, order) => {
-        console.log("🚀 ~ file: Card.jsx ~ line 12 ~ onDragStart ~ id", id)
-        console.log("🚀 ~ file: Card.jsx ~ line 8 ~ onDragStart ~ order", order);
-        console.log("coming heree")
         e.dataTransfer.setData("id", id);
         dragItem.current = order;
     };
@@ -19,7 +16,6 @@ const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOve
 
     const dragEnter = (e, position) => {
         dragOverItem.current = position;
-        // console.log(e.target.innerHTML);
     };
     function swapElement(array, indexA, indexB) {
         var tmp = array[indexA];
@@ -43,7 +39,7 @@ const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOve
         }
     };
     return (
-        <div className="card_main" onDrop={(e) => { drop(e) }} onDragEnter={(e) => dragEnter(e, index)} onDragStart={e => onDragStart(e, taskId, index)} draggable onDragOver={(e) => { console.log() }}>
+        <div key={index} className="card_main" onDrop={(e) => { drop(e) }} onDragEnter={(e) => dragEnter(e, index)} onDragStart={e => onDragStart(e, taskId, index)} draggable >
             <div className='card_wrapper' >
                 <h1>{name}</h1>
 

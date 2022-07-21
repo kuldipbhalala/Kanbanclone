@@ -8,8 +8,6 @@ import { AiOutlinePlus } from 'react-icons/ai'
 const HomePage = () => {
     const column = useSelector(getAllColumn)
     const tasks = useSelector(getAllTasks)
-    console.log("🚀 ~ file: HomePage.jsx ~ line 11 ~ HomePage ~ tasks", tasks);
-    console.log("🚀 ~ file: HomePage.jsx ~ line 10 ~ HomePage ~ column", column);
     const dispacth = useDispatch()
     const handleAddColumn = () => {
         dispacth(addColumn())
@@ -17,9 +15,9 @@ const HomePage = () => {
     return (
         <>
             <Header />
-             <div className='main_wrapper'>
+             <div key={"main_wrapper"} className='main_wrapper'>
                 {column.map((data) => (
-                    <ColumnCard tasks={tasks.filter(taskData=>taskData.columnId===data.columnId)} columnId={data.columnId} name={data.name} />
+                    <ColumnCard tasks={tasks.filter(taskData=>taskData.columnId===data.columnId)} key={data.columnId} columnId={data.columnId} name={data.name} />
                 ))}
                 <div className='plus_button' onClick={handleAddColumn}>
                     <AiOutlinePlus />
