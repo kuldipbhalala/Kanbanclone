@@ -45,9 +45,6 @@ const ColumnCard = ({ columnId, tasks, name }) => {
         dispatch(changeTaskColumn({ columnId, taskId: id }))
     };
 
-    const changeTaskName = () => {
-
-    }
     return (
         <div key={columnId} className='column_card_wrapper' onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, columnId)}>
             <div className='header_inner'>

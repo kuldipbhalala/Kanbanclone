@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { changeTaskColumn, removeTasks } from '../common/slices/prefSlice'
@@ -6,8 +6,6 @@ import icon from '../../src/point.png'
 
 const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOverItem, setEditTasks }) => {
     const dispatch = useDispatch()
-    // const dragItem = useRef();
-    // const dragOverItem = useRef();
     const onDragStart = (e, id, order) => {
         e.dataTransfer.setData("id", id);
         dragItem.current = order;
@@ -17,12 +15,6 @@ const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOve
     const dragEnter = (e, position) => {
         dragOverItem.current = position;
     };
-    function swapElement(array, indexA, indexB) {
-        var tmp = array[indexA];
-        array[indexA] = array[indexB];
-        array[indexB] = tmp;
-        return array
-    }
     const drop = (event) => {
         let id = event.dataTransfer.getData("id");
         const DraggedTask = tasks.filter((data) => data.taskId === id)
@@ -50,7 +42,7 @@ const Card = ({ name, taskId, columnId, index, tasks, setList, dragItem, dragOve
             </div>
             <span className='issue_type'>WEB - LIVE ISSUE</span>
             <div className='task_id'>
-                <img src={icon} />
+                <img src={icon} alt='icon'/>
                 <p>SPOTS - 1037</p>
             </div>
         </div>

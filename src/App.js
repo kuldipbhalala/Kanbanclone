@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import HomePage from './Pages/HomePage';
 import { Provider } from 'react-redux';
