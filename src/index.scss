@@ -32,6 +32,7 @@ body  {
     background: transparent;
     border-radius: 10px;
     padding: 10px 25px;
+    cursor: pointer;
   }
   
 }
@@ -124,12 +125,23 @@ letter-spacing: 2px;
       border-radius: 6px;
       border: none;
       position: relative;
-      margin-top: 6px;
-      svg{
-        margin-left: 5px;
-        cursor: pointer;
+      // margin-top: 6px;
+      button{
+        // position: relative;
         position: absolute;
         right: 9px;
+        background: transparent;
+        outline: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top:50%;
+        transform: translateY(-50%);
+        svg{
+          margin-left: 5px;
+          cursor: pointer;
+        }
       }
       .add_tasks_input{
         outline: none;
@@ -157,6 +169,7 @@ letter-spacing: 2px;
     justify-content: center;
     border-radius: 100%;
     padding: 17px;
+    cursor: pointer;
     svg{
       height: 25px;
       fill: white;
