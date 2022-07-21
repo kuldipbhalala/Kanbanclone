@@ -1,25 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+
+ 
 body  {
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(8, 8, 77);
+  background-color: #fff;
 }
 *{
   padding:0;
   margin:0 ;
   box-sizing: border-box;
 }
-
+.logo{
+  color: white;
+}
 .header_wrapper{
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding:5px 10px;
-  background: rgb(107, 107, 248);
+  background: #3a61a8;
 
   .sign_out{
     outline: none;
@@ -30,18 +35,32 @@ body  {
   }
   
 }
-.card_wrapper{
+.card_main{
   background-color: white;
-  border-radius: 10px;
+  border-radius: 6px;
+  width:100%;
+  padding:12px;
+  margin:10px 0px;
+  .issue_type{
+    font-size: 11px;
+    background: #3a61a8;
+    color: white;
+    padding: 3px 9px;
+    border-radius: 3px;
+    margin-top: 11px;
+    display: inline-block;
+  }
+.card_wrapper{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width:100%;
-  padding:10px 4px;
-  margin:10px 0px;
+
+
   h1{
 font-size: 18px;
+letter-spacing: 2px;
   }
+
   .icon_wrapper{
 
     .close_icon{
@@ -51,7 +70,7 @@ font-size: 18px;
       cursor: pointer;
     }
     .edit_icon{
-      color:rgb(8, 8, 77) ;
+      color:#3a61a8 ;
       // width:15px;
       cursor: pointer;
 
@@ -59,23 +78,58 @@ font-size: 18px;
     }
   }
 }
+.task_id{
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  p{
+    font-size: 13px;
+    padding-left: 5px;
+  }
+}
+}
 
 .main_wrapper{
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   overflow-x: scroll;
-  height: 100vh;
+  height: max-content;
+  margin-top: 40px;
+  max-width: 100%;
+  overflow: auto;
   .column_card_wrapper{
     background: gainsboro;
     padding: 10px 15px;
-    border-radius: 15px;
+    border-radius: 6px;
     margin:0px 25px;
+    width: 300px;
+    min-width: 300px;
+    align-self: stretch;
+    transition: 0.5s all ease;
+    .header_inner{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .close_icon{
+        fill: red;
+      }
+      h1{
+        font-size: 24px;
+      }
+    }
     .add_tasks_input{
       display: flex;
       align-items: center;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
+      position: relative;
+      margin-top: 6px;
       svg{
         margin-left: 5px;
         cursor: pointer;
+        position: absolute;
+        right: 9px;
       }
       .add_tasks_input{
         outline: none;
@@ -86,22 +140,27 @@ font-size: 18px;
       outline: none;
       border: 2px solid red;
       background: transparent;
-      border-radius: 10px;
+      border-radius: 6px;
       padding: 10px 25px;
-      margin: 0 auto;
-      display: block;
+      // margin: 0 auto;
+      // display: block;
       cursor: pointer;
-      margin-top: 15px;
+      // margin-top: 15px;
     }
   }
   .plus_button{
     width: 50px;
     height: 50px;
-    background-color: lightblue;
+    background-color: #3a61a8;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
+    padding: 17px;
+    svg{
+      height: 25px;
+      fill: white;
+    }
   }
   
 }

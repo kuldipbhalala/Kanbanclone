@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Card from './Card'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { addTasks, changeTaskColumn, deleteColumn, editColumnName } from '../common/slices/prefSlice'
+import {  AiOutlineClose } from 'react-icons/ai'
 const ColumnCard = ({ columnId, tasks, name }) => {
     const [taskName, setTaskName] = useState("")
     const [list , setList] = useState(tasks)
     const [columnName, setColumnName] = useState(name)
     const dispatch = useDispatch()
+    const dragItem = useRef();
+    const dragOverItem = useRef();
     useEffect(()=>{
         setList(tasks)
     },[tasks])
@@ -48,16 +51,19 @@ const ColumnCard = ({ columnId, tasks, name }) => {
     };
     return (
         <div className='column_card_wrapper' onDragOver={(e) => onDragOver(e)} onDrop={(e) => onDrop(e, columnId)}>
+            <div className='header_inner'>
             <h1 onBlur={handleEditColumn} onInput={(e) => { setColumnName(e.target.innerText) }} contentEditable={true}>{name}</h1>
+            <AiOutlineClose onClick={handleDeleteColumn} size={20} className='close_icon' />
+            </div>
             {list.length !== 0 && list.map((data ,index) => (
-                <Card name={data.taskName} setList={setList} tasks={list} index={index} taskId={data.taskId} columnId={columnId} />
+                <Card dragItem={dragItem} dragOverItem={dragOverItem} name={data.taskName} setList={setList} tasks={list} index={index} taskId={data.taskId} columnId={columnId} />
             ))
             }
             <div className='add_tasks_input'>
                 <input value={taskName} onChange={(e) => { setTaskName(e.target.value) }} className='add_tasks_input' placeholder='Add Tasks' type="text" />
                 <AiOutlinePlusCircle onClick={handleAdd} size={20} className='add_tasks' />
             </div>
-            <button className='delete_button' onClick={handleDeleteColumn}>Delete</button>
+            
         </div>
     )
 }

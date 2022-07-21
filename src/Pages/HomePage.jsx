@@ -17,15 +17,14 @@ const HomePage = () => {
     return (
         <>
             <Header />
-            <div className='main_wrapper'>
-
+             <div className='main_wrapper'>
                 {column.map((data) => (
                     <ColumnCard tasks={tasks.filter(taskData=>taskData.columnId===data.columnId)} columnId={data.columnId} name={data.name} />
                 ))}
                 <div className='plus_button' onClick={handleAddColumn}>
                     <AiOutlinePlus />
                 </div>
-            </div>
+                </div>
 
         </>
     )
