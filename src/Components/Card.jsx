@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import { AiFillEdit, AiOutlineClose } from 'react-icons/ai'
 import { useDispatch } from 'react-redux'
 import { removeTasks } from '../common/slices/prefSlice'
+import icon from '../../src/point.png'
+
 const Card = ({ name, taskId, columnId, index, tasks, setList,dragItem,dragOverItem }) => {
     const dispatch = useDispatch()
     // const dragItem = useRef();
@@ -25,21 +27,21 @@ const Card = ({ name, taskId, columnId, index, tasks, setList,dragItem,dragOverI
         return array
     }
     const drop = (event ,e) => {
-        let id = event.dataTransfer.getData("id");
+        // let id = event.dataTransfer.getData("id");
         let sameColumn;
 
         // tasks.forEach(())
-        console.log("🚀 ~ file: Card.jsx ~ line 29 ~ drop ~ id", id)
-    console.log("🚀 ~ file: Card.jsx ~ line 28 ~ drop ~ event", event)
-    console.log("🚀 ~ file: Card.jsx ~ line 28 ~ drop ~ e", e,dragItem.current);
-        // const copyListItems = [...tasks];
+    //     console.log("🚀 ~ file: Card.jsx ~ line 29 ~ drop ~ id", id)
+    // console.log("🚀 ~ file: Card.jsx ~ line 28 ~ drop ~ event", event)
+    // console.log("🚀 ~ file: Card.jsx ~ line 28 ~ drop ~ e", e,dragItem.current);
+        const copyListItems = [...tasks];
         // console.log(copyListItems[dragItem.current],copyListItems[e]  ,"this should right")
-        // const dragItemContent = copyListItems[dragItem.current];
-        // copyListItems.splice(dragItem.current, 1);
-        // copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+        const dragItemContent = copyListItems[dragItem.current];
+        copyListItems.splice(dragItem.current, 1);
+        copyListItems.splice(dragOverItem.current, 0, dragItemContent);
         // // // console.log("🚀 ~ file: Card.jsx ~ line 29 ~ drop ~ copyListItems", copyListItems);
         // // // console.log("🚀 ~ file: Card.jsx ~ line 32 ~ drop ~ swapElement(tasks,dragItem.current,dragOverItem.current)", swapElement(tasks, dragItem.current, dragOverItem.current));
-        // setList(copyListItems);
+        setList(copyListItems);
         dragItem.current = null;
         dragOverItem.current = null;
     };
